@@ -51,7 +51,7 @@ We added a help file with the default configuration to connect Jenkins and the O
 
 ## References:
 
-1. [Jenkins no Docker Hub.](https://hub.docker.com/_/jenkins/ "Jenkins no Docker Hub")
+1. [Jenkins no Docker Hub.](https://hub.docker.com/r/jenkins/jenkins "Jenkins no Docker Hub")
 
 1. [Official Jenkins Docker image.](https://github.com/jenkinsci/docker/blob/master/README.md "Official Jenkins Docker image")
 

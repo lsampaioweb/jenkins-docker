@@ -1,0 +1,55 @@
+version: "3.7"
+
+services:
+  jenkins:
+    image: "registry.libraries.homelab/jenkins/jenkins:alpine"
+    container_name: "jenkins"
+    restart: "always"
+    volumes:
+      - "${ETC_LOCALTIME}:/etc/localtime:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "jenkins-data:/var/jenkins_home"
+      - "./backup:/var/jenkins_backup"
+    networks:
+      - "net-proxy"
+      - "net-ldap"
+      - "net-repositories"
+      - "net-libraries"
+      - "net-sonarqube"
+    environment:
+      - "JAVA_OPTS=-Duser.timezone=America/Maceio -Dhudson.footerURL=https://build.homelab"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=net-proxy"
+      - "traefik.frontend.passHostHeader=true"
+      - "traefik.frontend.headers.SSLRedirect=true"
+      - "traefik.frontend.headers.forceSTSHeader=true"
+      - "traefik.frontend.headers.STSSeconds=315360000"
+      - "traefik.frontend.headers.STSIncludeSubdomains=true"
+      - "traefik.frontend.headers.STSPreload=true"
+      - "traefik.frontend.headers.browserXSSFilter=true"
+      - "traefik.frontend.headers.contentTypeNosniff=true"
+
+      - "traefik.slave.frontend.rule=Host:slave.build.homelab"
+      - "traefik.slave.frontend.backend=jenkins"
+      - "traefik.slave.port=50000"
+
+      - "traefik.jenkins.frontend.rule=Host:build.homelab"
+      - "traefik.jenkins.frontend.backend=jenkins"
+      - "traefik.jenkins.port=8080"
+
+volumes:
+  jenkins-data:
+    external: true
+
+networks:
+  net-proxy:
+    external: true
+  net-ldap:
+    external: true
+  net-repositories:
+    external: true
+  net-libraries:
+    external: true
+  net-sonarqube:
+    external: true

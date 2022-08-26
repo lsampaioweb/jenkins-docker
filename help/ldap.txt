@@ -1,0 +1,35 @@
+Create LDAP Connection:
+  Server
+    openldap
+
+  root DN
+    dc=homelab
+
+  - Allow blank rootDN
+
+  User search base
+    ou=users
+
+  User search filter
+    (&(objectClass=posixAccount)(uid={0})(memberOf=cn=jenkins-user,ou=groups,dc=homelab))
+
+  Group search base
+    ou=groups
+
+  Group search filter
+    (&(cn={0})(objectclass=groupOfUniqueNames))
+
+  Group membership
+    + Search for LDAP groups containing user
+
+  Manager DN
+    cn=ldap-reader,dc=homelab
+
+  Manager Password
+    ????
+
+  Display Name LDAP attribute
+    cn
+
+  Email Address LDAP attribute
+    mail
