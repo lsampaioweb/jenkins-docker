@@ -39,7 +39,7 @@ We added a help file with the default configuration to connect Jenkins and the O
 
 ``` bash
   # The "." means the current folder.
-  docker cp jenkins:/var/jenkins_home .  
+  docker cp jenkins:/var/jenkins_home .
 ```
 
 ## Restore:
@@ -74,10 +74,10 @@ We added a help file with the default configuration to connect Jenkins and the O
 
 1. [Build status badges (Get started with Jenkins, part 10).](https://www.youtube.com/watch?v=clQEdNdOBm0 "Build status badges (Get started with Jenkins, part 10)")
 
-## License:
+### License:
 
 [MIT](LICENSE "MIT License")
 
-## Created by: 
+### Created by:
 
 1. Luciano Sampaio.
